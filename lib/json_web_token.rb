@@ -1,4 +1,6 @@
 class JsonWebToken
+  require 'active_support/hash_with_indifferent_access'
+
   SECRET_KEY = ENV['SECREt_KEY_BASE']
 
   def self.encode(payload, exp = 24.hours)
@@ -8,7 +10,8 @@ class JsonWebToken
 
 
   def self.decode(token)
-    JWT.decode(token, SECRET_KEY, true, { :algorithm => algorithm }).first
+    decoded, = JWT.decode(token, SECRET_KEY)
+    HashWithIndifferentAccess.new(decoded)
   rescue
     nil
   end
