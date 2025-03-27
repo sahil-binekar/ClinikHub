@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: clinik_hub_dev
+  username: <%= ENV['DB_USER_NAME'] %>
+  password: <%= ENV['DB_USER_PASSWORD'] %>
+
+# test:
+#   <<: *default
+#   database: clinik_hub_test
+
+
+production:
+    <<: *default
+    database: clinik_hub_prod
