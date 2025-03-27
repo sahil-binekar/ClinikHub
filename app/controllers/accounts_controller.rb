@@ -18,12 +18,11 @@ class AccountsController < ApplicationController
   #POST /accounts/login
   def login
     user = User.find_by(email: params[:email])
-    # binding.pry
     if user&.authenticate(params[:password])
       token = JsonWebToken.encode(user_id: user.id, role: user.role)
-      render json: { token: token, user: user.as_json(only: [:first_name, :last_name, :role]) }, status: :ok
+      success_response({ token: token, user: user.as_json(only: [:first_name, :last_name, :role]) }, 200)
     else
-      render json: { error: "Invalid email or password" }, status: :unauthorized
+      error_response({ error_key: "Invalid email or password" }, 401)
     end
   end
 

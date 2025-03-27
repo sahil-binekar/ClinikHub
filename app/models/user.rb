@@ -3,7 +3,7 @@ class User < ApplicationRecord
 
   # enum :role, { doctor: "doctor", receptionist: "receptionist" }
   # enum :role, { doctor: 0, receptionist: 1 }
-  enum :role, [:doctor, :receptionist]
+  enum :role, [:Doctor, :Receptionist]
 
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 6 }
