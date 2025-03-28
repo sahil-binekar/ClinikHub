@@ -8,5 +8,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :patients
+  resources :patients do
+    collection do
+      get :patient_graph
+    end
+  end
 end
