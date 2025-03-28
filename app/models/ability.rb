@@ -8,9 +8,10 @@ class Ability
 
     case user.role
     when 'Receptionist'
-      can :manage, Patient  # Full CRUD access to patients
+      can [:create, :update, :show, :index, :destroy], Patient  # Full CRUD access to patients
     when 'Doctor'
-      can :read, Patient  # Doctors can only view patients
+      can :index, :show, Patient  # Doctors can only view patients
+      can :patient_graph, Patient  # Only Doctors can only view patient's graph
     end
   end
 end
